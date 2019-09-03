@@ -70,10 +70,21 @@ public class BookController {
     }
     @PutMapping("/updateTaginBook/{BookId}/{id}")
     public BookDTO updateBookTag(@PathVariable Long BookId, @PathVariable Long id) {
-      return  bookService.updateBookTag(BookId,id);
-          
+      return  bookService.updateBookTag(BookId,id);      
     }
     
+    @PutMapping("/updateTagsinBook/{BookId}")
+    public BookDTO updateBookTags(@PathVariable Long BookId, @RequestBody ArrayList<String> tags) {
+      return  bookService.updateBookTags(BookId,tags);      
+    }	
+    
+    /*
+     * 
+     * 
+     * BookTag Controller
+     * 
+     * 
+     */
 	
 	 @GetMapping("/tags")
 	    public ArrayList<BookTagDTO> findAllTags() {
@@ -86,9 +97,9 @@ public class BookController {
 	        return bookService.createTag(booktag);
 	    }
 	 
-	 @DeleteMapping("/tags/{id}")
-	    public void deleteTag(@PathVariable Long id) {
-	    	bookService.deleteTag(id);
+	 @DeleteMapping("/tags/{name}")
+	    public void deleteTag(@PathVariable String name) {
+	    	bookService.deleteTag(name);
 	    	
 	    }
 	 

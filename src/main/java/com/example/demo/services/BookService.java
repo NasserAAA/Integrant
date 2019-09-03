@@ -114,7 +114,7 @@ public class BookService {
 	          .orElseThrow(BookNotFoundException::new);
 	        BookTag booktag =  bookTagRepository.findById(id)
 	          .orElseThrow(BookTagNotFoundException::new);
-	        ArrayList<BookTag> booktag2 =  (ArrayList<BookTag>) book.getTags();
+	        ArrayList<BookTag> booktag2 =  new ArrayList<BookTag>(book.getTags());
 	        ArrayList<BookTag> mergedSet = new ArrayList<BookTag>(); 
 	        ArrayList<BookTag> booktag3 = new ArrayList<BookTag>();
 	        booktag3.add(booktag);
@@ -127,6 +127,29 @@ public class BookService {
 	        return bookdto;
 	    }
     
+    public BookDTO updateBookTags(Long bookId,ArrayList<String> tags) {
+    	Book book = bookRepository.findById(bookId)
+  	          .orElseThrow(BookNotFoundException::new);
+    	ArrayList<BookTag> booktag =  new ArrayList<BookTag>(book.getTags());
+    	for(int i = 0;i<tags.size();i++) {
+    		BookTag strTag = bookTagRepository.findByName(tags.get(i));
+    		if(strTag==null)
+    			strTag = new BookTag(tags.get(i));
+    		if(!(booktag.contains(strTag)))
+    			booktag.add(strTag);
+    			}
+    	book.setTags(booktag);
+    	BookDTO bookdto = bookMapper.BookToDTO(book,bookRepository);
+        return bookdto;
+    }
+    
+    /*
+     * 
+     * 
+     * BookTag Service
+     * 
+     * 
+     */
     public ArrayList<BookTagDTO> findAllTags(){
 		ArrayList<BookTagDTO> list = new ArrayList<>();
 		bookTagRepository.findAll().forEach(e -> list.add( tagMapper.TagToDTO(e,bookTagRepository)));
@@ -140,9 +163,9 @@ public class BookService {
     return bookTagdto;
     }
 
-    public void deleteTag( Long id) {
-        bookTagRepository.findById(id)
-          .orElseThrow(BookTagNotFoundException::new);
+    public void deleteTag( String name) {
+        BookTag booktag = bookTagRepository.findByName(name);
+        Long id = booktag.getTagId();
         bookTagRepository.deleteById(id);
         
     }
@@ -152,7 +175,7 @@ public class BookService {
           .orElseThrow(BookTagNotFoundException::new);
         Book book = bookRepository.findById(id)
           .orElseThrow(BookNotFoundException::new);
-        ArrayList<Book> book2 = (ArrayList<Book>) tag.getBooks();
+        ArrayList<Book> book2 = new ArrayList<Book>(tag.getBooks());
         ArrayList<Book> mergedSet = new ArrayList<Book>(); 
         ArrayList<Book> book3 = new ArrayList<Book>();
         book3.add(book);
@@ -164,6 +187,8 @@ public class BookService {
         BookTagDTO bookTagdto = tagMapper.TagToDTO(tag,bookTagRepository);
         return bookTagdto;
     }
+    
+    
     
     
     

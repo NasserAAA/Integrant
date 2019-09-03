@@ -45,8 +45,10 @@ public class AuthorService {
 		 return authordto;
 		}
 	
-	public AuthorDTO findAuthor(Long id) {
-    	Author author = authorRepository.findById(id).orElseThrow(AuthorNotFoundException::new);
+	public AuthorDTO findAuthor(String name) {
+    	Author author = authorRepository.findByName(name);
+    	if(author==null)
+    		return null;
     	AuthorDTO authordto = authorMapper.AuthorToDTO(author,authorRepository);
         return authordto;
           
@@ -58,25 +60,28 @@ public class AuthorService {
         return authordto;
     }
 	
-	public void deleteAuthor( Long id) {
-        authorRepository.findById(id)
-          .orElseThrow(AuthorNotFoundException::new);
-        authorRepository.deleteById(id);
+	public void deleteAuthor( String name) {
+         Author author = authorRepository.findByName(name);
+         if(!(author==null)) {
+         Long id = author.getAuthorId();	 
+         authorRepository.deleteById(id);
+         }
         
     }
 	
-	 public AuthorDTO updateAuthor( Author author,  Long id) {
-	        authorRepository.findById(id)
-	          .orElseThrow(AuthorNotFoundException::new);
-	        author.setAuthorId(id);
+	 public AuthorDTO updateAuthor( Author author, String name) {
+	        Author newAuthor = authorRepository.findByName(name);
+	        author.setAuthorId(newAuthor.getAuthorId());
 	        authorRepository.save(author);
 	        AuthorDTO authordto = authorMapper.AuthorToDTO(author,authorRepository);
 	        return authordto;
 	    }
 		
 	
-	public BookDTO authorAddBook(Long id , BookDTO book ) {
-		Author author = authorRepository.findById(id).orElseThrow(AuthorNotFoundException::new);
+	public BookDTO authorAddBook(String name , BookDTO book ) {
+		Author author = authorRepository.findByName(name);
+		if(author==null)
+			return null;
 		Book book2 = new Book();
 		book2.setTitle(book.getTitle());
 		book2.setAuthor(author);
@@ -94,9 +99,11 @@ public class AuthorService {
 			throw new BookIdMismatchException();
 	}
 	
-	 public ArrayList<BookDTO> findAllBooksByAuthor(Long id){
+	 public ArrayList<BookDTO> findAllBooksByAuthor(String name){
 			ArrayList<BookDTO> list = new ArrayList<>();
-			Author author = authorRepository.findById(id).orElseThrow(AuthorNotFoundException::new);
+			Author author = authorRepository.findByName(name);
+			if(author==null)
+				return null;
 			bookRepository.findAllBooksByAuthor(author).forEach(e -> list.add(bookMapper.BookToDTO(e,bookRepository)));
 			return list;
 		}

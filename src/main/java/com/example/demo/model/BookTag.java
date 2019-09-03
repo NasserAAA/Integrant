@@ -17,6 +17,8 @@ import lombok.Data;
 @Table(name ="tags")
 public class BookTag {
 	
+	
+
 	@Id
 	@GeneratedValue
 	@Column(name="tag_id")
@@ -28,5 +30,12 @@ public class BookTag {
 	@ManyToMany(mappedBy = "tags",fetch = FetchType.LAZY)
     private Collection<Book> books ;
 	
+	public BookTag() {
+		
+	}
+	
+	public BookTag(String name) {
+		this.name=name;
+	}
 		
 }

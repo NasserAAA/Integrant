@@ -36,9 +36,9 @@ public class AuthorController {
         return authorService.findAuthorByEmail(email);
     }
 	
-	@GetMapping("/{id}")	
-    public AuthorDTO findAuthor(@PathVariable Long id) {
-        return authorService.findAuthor(id);
+	@GetMapping("/{name}")	
+    public AuthorDTO findAuthor(@PathVariable String name) {
+        return authorService.findAuthor(name);
     }
 	
 	@PostMapping
@@ -47,22 +47,22 @@ public class AuthorController {
         return authorService.createAuthor(author);
     }
 	
-	@DeleteMapping("/{id}")
-    public void deleteAuthor(@PathVariable Long id) {
-    	authorService.deleteAuthor(id);
+	@DeleteMapping("/{name}")
+    public void deleteAuthor(@PathVariable String name) {
+    	authorService.deleteAuthor(name);
     	
     }
 	
-	@PutMapping("/{id}")
-    public AuthorDTO updateAuthor(@RequestBody Author author, @PathVariable Long id) {
-      return  authorService.updateAuthor(author,id);
+	@PutMapping("/{name}")
+    public AuthorDTO updateAuthor(@RequestBody Author author, @PathVariable String name) {
+      return  authorService.updateAuthor(author,name);
           
     }
 	
-	@PostMapping("/createBook/{id}")
+	@PostMapping("/createBook/{name}")
 	@ResponseStatus(HttpStatus.CREATED)
-	public BookDTO authorAddBook(@RequestBody BookDTO book, @PathVariable Long id) {
-		return authorService.authorAddBook(id, book);
+	public BookDTO authorAddBook(@RequestBody BookDTO book, @PathVariable String name) {
+		return authorService.authorAddBook(name, book);
 	}
 	
 	@DeleteMapping("/deleteBook/{book_id}/{author_id}")
@@ -70,9 +70,9 @@ public class AuthorController {
 		 authorService.authorDeleteBook(author_id, book_id);
 	}
 	
-	@GetMapping("/AllBooks/{id}")
-	public ArrayList<BookDTO> findAllBooksByAuthor(@PathVariable Long id) {
-	 return authorService.findAllBooksByAuthor(id);
+	@GetMapping("/AllBooks/{name}")
+	public ArrayList<BookDTO> findAllBooksByAuthor(@PathVariable String name) {
+	 return authorService.findAllBooksByAuthor(name);
 	 }
 	
 	@PutMapping("/updateBook/{book_id}/{author_id}")
