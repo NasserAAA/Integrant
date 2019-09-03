@@ -68,15 +68,17 @@ public class BookController {
     public BookDTO updateoutStock(@PathVariable Long id) {
     	return bookService.updateoutStock(id);
     }
-    @PutMapping("/updateTaginBook/{BookId}/{id}")
-    public BookDTO updateBookTag(@PathVariable Long BookId, @PathVariable Long id) {
-      return  bookService.updateBookTag(BookId,id);      
-    }
+    
     
     @PutMapping("/updateTagsinBook/{BookId}")
     public BookDTO updateBookTags(@PathVariable Long BookId, @RequestBody ArrayList<String> tags) {
       return  bookService.updateBookTags(BookId,tags);      
     }	
+    
+    @GetMapping("/findAllTagsinBook/{name}")
+    public ArrayList<BookTagDTO> findAllTagsinBook(@PathVariable String name) {
+        return bookService.findAllTagsinBook(name);
+    }
     
     /*
      * 
@@ -102,11 +104,11 @@ public class BookController {
 	    	bookService.deleteTag(name);
 	    	
 	    }
-	 
-	 @PutMapping("/tags/updateBookinTag/{TagId}/{id}")
-	    public BookTagDTO updateTagBook(@PathVariable Long TagId, @PathVariable Long id) {
-	      return  bookService.updateTagBook(TagId,id);
-	          
+	 @GetMapping("/findAllBooksinTag/{name}")
+	    public ArrayList<BookDTO> findAllBooksinTag(@PathVariable String name) {
+	        return bookService.findAllBooksinTag(name);
 	    }
+	 
+	 
 }
 

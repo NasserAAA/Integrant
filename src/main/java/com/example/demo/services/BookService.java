@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import com.example.demo.DTO.BookDTO;
 import com.example.demo.DTO.BookTagDTO;
 import com.example.demo.exceptionhandler.BookNotFoundException;
-import com.example.demo.exceptionhandler.BookTagNotFoundException;
 import com.example.demo.mapper.BookMapper;
 import com.example.demo.mapper.BookTagMapper;
 import com.example.demo.model.Author;
@@ -109,38 +108,32 @@ public class BookService {
          return bookdto;
     }
     
-    public BookDTO updateBookTag( Long bookId,  Long id) {
-	        Book book = bookRepository.findById(bookId)
-	          .orElseThrow(BookNotFoundException::new);
-	        BookTag booktag =  bookTagRepository.findById(id)
-	          .orElseThrow(BookTagNotFoundException::new);
-	        ArrayList<BookTag> booktag2 =  new ArrayList<BookTag>(book.getTags());
-	        ArrayList<BookTag> mergedSet = new ArrayList<BookTag>(); 
-	        ArrayList<BookTag> booktag3 = new ArrayList<BookTag>();
-	        booktag3.add(booktag);
-	        mergedSet.addAll(booktag3); 
-	        mergedSet.addAll(booktag2);
-	        book.setTags(mergedSet);;
-	        book.setBookId(bookId);
-	        bookRepository.save(book);
-	        BookDTO bookdto = bookMapper.BookToDTO(book,bookRepository);
-	        return bookdto;
-	    }
-    
     public BookDTO updateBookTags(Long bookId,ArrayList<String> tags) {
     	Book book = bookRepository.findById(bookId)
   	          .orElseThrow(BookNotFoundException::new);
     	ArrayList<BookTag> booktag =  new ArrayList<BookTag>(book.getTags());
     	for(int i = 0;i<tags.size();i++) {
     		BookTag strTag = bookTagRepository.findByName(tags.get(i));
-    		if(strTag==null)
+    		if(strTag==null) {
     			strTag = new BookTag(tags.get(i));
+    			bookTagRepository.save(strTag);
+    		}
     		if(!(booktag.contains(strTag)))
     			booktag.add(strTag);
     			}
     	book.setTags(booktag);
+    	bookRepository.save(book);
     	BookDTO bookdto = bookMapper.BookToDTO(book,bookRepository);
         return bookdto;
+    }
+    
+    public ArrayList<BookTagDTO> findAllTagsinBook(String name){
+    	Book book = bookRepository.findByUniquetitle(name);
+    	if(book==null)
+    		return null;
+    	ArrayList<BookTag> booktag = new ArrayList<BookTag>(book.getTags());
+    	ArrayList<BookTagDTO> booktagdto = tagMapper.TagsToDTOs(booktag, bookTagRepository);
+    	return booktagdto;
     }
     
     /*
@@ -170,24 +163,14 @@ public class BookService {
         
     }
  
-    public BookTagDTO updateTagBook( Long tagId,  Long id) {
-        BookTag tag = bookTagRepository.findById(tagId)
-          .orElseThrow(BookTagNotFoundException::new);
-        Book book = bookRepository.findById(id)
-          .orElseThrow(BookNotFoundException::new);
-        ArrayList<Book> book2 = new ArrayList<Book>(tag.getBooks());
-        ArrayList<Book> mergedSet = new ArrayList<Book>(); 
-        ArrayList<Book> book3 = new ArrayList<Book>();
-        book3.add(book);
-        mergedSet.addAll(book3); 
-        mergedSet.addAll(book2);
-        tag.setBooks(mergedSet);
-        tag.setTagId(tagId);
-        bookTagRepository.save(tag);
-        BookTagDTO bookTagdto = tagMapper.TagToDTO(tag,bookTagRepository);
-        return bookTagdto;
+    public ArrayList<BookDTO> findAllBooksinTag(String name){
+    	BookTag booktag = bookTagRepository.findByName(name);
+    	if(booktag==null)
+    		return null;
+    	ArrayList<Book> book = new ArrayList<Book>(booktag.getBooks());
+    	ArrayList<BookDTO> bookdto = bookMapper.BooksToDTOs(book, bookRepository);
+    	return bookdto;
     }
-    
     
     
     
