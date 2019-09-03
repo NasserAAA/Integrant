@@ -11,7 +11,7 @@ import org.mapstruct.Mappings;
 import com.example.demo.DTO.BookTagDTO;
 import com.example.demo.model.Book;
 import com.example.demo.model.BookTag;
-import com.example.demo.repo.BookTagRepository;
+import com.example.demo.repository.BookTagRepository;
 
 @Mapper(componentModel="spring")
 public interface BookTagMapper {

@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import java.util.List;
+import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,7 +27,7 @@ public class AuthorController {
 	private AuthorService authorService;
 	
 	@GetMapping
-	public List<AuthorDTO> findAll() {
+	public ArrayList<AuthorDTO> findAll() {
 	 return authorService.findAllAuthors();
 	 }
 	
@@ -71,7 +71,7 @@ public class AuthorController {
 	}
 	
 	@GetMapping("/AllBooks/{id}")
-	public List<BookDTO> findAllBooksByAuthor(@PathVariable Long id) {
+	public ArrayList<BookDTO> findAllBooksByAuthor(@PathVariable Long id) {
 	 return authorService.findAllBooksByAuthor(id);
 	 }
 	

@@ -13,9 +13,9 @@ import com.example.demo.mapper.BookTagMapper;
 import com.example.demo.model.Author;
 import com.example.demo.model.Book;
 import com.example.demo.model.BookTag;
-import com.example.demo.repo.AuthorRepository;
-import com.example.demo.repo.BookRepository;
-import com.example.demo.repo.BookTagRepository;
+import com.example.demo.repository.AuthorRepository;
+import com.example.demo.repository.BookRepository;
+import com.example.demo.repository.BookTagRepository;
 
 @Service
 public class BookService {
