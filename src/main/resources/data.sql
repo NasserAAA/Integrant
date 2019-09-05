@@ -1,7 +1,7 @@
 INSERT IGNORE INTO tags(name)
 VALUES ("Drama"),("Sci-Fi"),("Comedy"),("Poetry"),("Literature"),("History");
 INSERT IGNORE INTO authors(name,email)
-VALUES ("No Author Yet","NAY@gmail.com"),
+VALUES ("Unknown Author","UA@gmail.com"),
 	   ("Yuval Noah Harari","yuval@gmail.com"),
 	   ("Stephen Hawking","shawking@gmail.com"),
 	   ("John Peck","jpeck@gmail.com");
