@@ -1,9 +1,5 @@
-server:
-  port: 8081  
-  error:
-    path: /error2
-
-spring:  application:
+spring:
+  profiles: dev  application:
     name: Bootstrap Spring Boot
   jpa:
     hibernate:      ddl-auto: none
@@ -12,7 +8,7 @@ spring:  application:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
   datasource:
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/db-spring
+    url: jdbc:mysql://localhost:3306/db-spring?createDatabaseIfNotExist=true
     username: root
     password: nasser
     initialization-mode: always
@@ -21,3 +17,31 @@ spring:  application:
     enabled: true
     prefix: classpath:/templates/
     suffix: .html 
+---
+ spring:
+    profiles: test
+    h2:
+      console:
+        enabled: true
+    application:
+      name: Bootstrap Spring Boot
+    main:
+     allow-bean-definition-overriding: true
+    thymeleaf:
+      cache: false
+      enabled: true
+      prefix: classpath:/templates/
+      suffix: .html
+
+    datasource:
+      continue-on-error: true
+      url: jdbc:h2:mem:db;DB_CLOSE_DELAY=-1
+      username: mn
+      password: mn
+      driver-class-name: org.h2.Driver
+    jpa:
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.H2Dialect
+      hibernate:
+        ddl-auto: create
