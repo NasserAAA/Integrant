@@ -70,25 +70,17 @@ public class BookService {
         return bookdto;
     }
     
-    public void deleteBook( Long id) {
-        bookRepository.findById(id)
-          .orElseThrow(BookNotFoundException::new);
+    public void deleteBook(String booktitle,String author) {
+    	String uniqueTitle = booktitle+" Book By "+author;
+        Book book = bookRepository.findByUniquetitle(uniqueTitle);
+    	Long id = book.getBookId();
         bookRepository.deleteById(id);
         
     }
-    
-    public BookDTO updateBook( Book book,  Long id) {
-        bookRepository.findById(id)
-          .orElseThrow(BookNotFoundException::new);
-        book.setBookId(id);
-        bookRepository.save(book);
-        BookDTO bookdto = bookMapper.BookToDTO(book,bookRepository);
-        return bookdto;
-    }
 	
-    public BookDTO updateinStock(Long id , int stock) {
-        Book book =	 bookRepository.findById(id)
-         .orElseThrow(BookNotFoundException::new);
+    public BookDTO updateinStock(String uniqueTitle, int stock) {
+    	 Book book = bookRepository.findByUniquetitle(uniqueTitle);
+    	 Long id = book.getBookId();
     	 book.setBookId(id);
     	 book.setInstock(true);
     	 book.setStock(stock);
@@ -97,9 +89,9 @@ public class BookService {
          return bookdto;
     }
     
-    public BookDTO updateoutStock(Long id) {
-        Book book =	 bookRepository.findById(id)
-         .orElseThrow(BookNotFoundException::new);
+    public BookDTO updateoutStock(String uniqueTitle) {
+         Book book = bookRepository.findByUniquetitle(uniqueTitle);
+   	     Long id = book.getBookId();
     	 book.setBookId(id);
     	 book.setInstock(false);
     	 book.setStock(0);
@@ -108,9 +100,8 @@ public class BookService {
          return bookdto;
     }
     
-    public BookDTO updateBookTags(Long bookId,ArrayList<String> tags) {
-    	Book book = bookRepository.findById(bookId)
-  	          .orElseThrow(BookNotFoundException::new);
+    public BookDTO updateBookTags(String uniqueTitle,ArrayList<String> tags) {
+    	Book book = bookRepository.findByUniquetitle(uniqueTitle);
     	ArrayList<BookTag> booktag =  new ArrayList<BookTag>(book.getTags());
     	for(int i = 0;i<tags.size();i++) {
     		BookTag strTag = bookTagRepository.findByName(tags.get(i));
@@ -127,8 +118,8 @@ public class BookService {
         return bookdto;
     }
     
-    public ArrayList<BookTagDTO> findAllTagsinBook(String name){
-    	Book book = bookRepository.findByUniquetitle(name);
+    public ArrayList<BookTagDTO> findAllTagsinBook(String uniqueTitle){
+    	Book book = bookRepository.findByUniquetitle(uniqueTitle);
     	if(book==null)
     		return null;
     	ArrayList<BookTag> booktag = new ArrayList<BookTag>(book.getTags());

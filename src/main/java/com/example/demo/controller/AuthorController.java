@@ -65,9 +65,9 @@ public class AuthorController {
 		return authorService.authorAddBook(name, book);
 	}
 	
-	@DeleteMapping("/deleteBook/{book_id}/{author_id}")
-	public void authorDeleteBook(@PathVariable Long book_id, @PathVariable Long author_id ) {
-		 authorService.authorDeleteBook(author_id, book_id);
+	@DeleteMapping("/deleteBook/{bookTitle}/{authorName}")
+	public void authorDeleteBook(@PathVariable String bookTitle, @PathVariable String authorName ) {
+		 authorService.authorDeleteBook(bookTitle, authorName);
 	}
 	
 	@GetMapping("/AllBooks/{name}")
@@ -75,9 +75,5 @@ public class AuthorController {
 	 return authorService.findAllBooksByAuthor(name);
 	 }
 	
-	@PutMapping("/updateBook/{book_id}/{author_id}")
-	public BookDTO authorUpdateBook(@RequestBody Book book, @PathVariable Long book_id, @PathVariable Long author_id) {
-		return authorService.authorUpdateBook(author_id, book_id, book);
-	}
 	
 }

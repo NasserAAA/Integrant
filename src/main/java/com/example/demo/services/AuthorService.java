@@ -91,10 +91,13 @@ public class AuthorService {
 		return bookdto;
 	}
 	
-	public void authorDeleteBook(Long author_id, Long book_id) {
-		Book book = bookRepository.findById(book_id).orElseThrow(BookNotFoundException::new);
-		if(book.getAuthor().getAuthorId()==author_id) 
+	public void authorDeleteBook(String bookTitle, String authorName) {
+		String uniqueTitle = bookTitle+" Book By "+authorName;
+		Book book = bookRepository.findByUniquetitle(uniqueTitle);
+		if(book.getAuthor().getName()==authorName) {
+			Long book_id = book.getBookId();
 			bookRepository.deleteById(book_id);
+		}
 		else
 			throw new BookIdMismatchException();
 	}
@@ -108,16 +111,5 @@ public class AuthorService {
 			return list;
 		}
 	 
-	 public BookDTO authorUpdateBook(Long author_id,Long book_id , Book book) {
-	  Book book2 = bookRepository.findById(book_id).orElseThrow(BookNotFoundException::new);
-	  if(book2.getAuthor().getAuthorId()==author_id) { 
-		  book.setBookId(book_id);
-		  bookRepository.save(book);
-	        BookDTO bookdto = bookMapper.BookToDTO(book,bookRepository);
-	        return bookdto;
-	  }
-	  else
-		  throw new BookIdMismatchException();	
-	 }
 	
 }

@@ -47,37 +47,31 @@ public class BookController {
         return bookService.createBook(book);
     }
  
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-    	bookService.deleteBook(id);
+    @DeleteMapping("/{booktitle}/{author}")
+    public void delete(@PathVariable String booktitle, @PathVariable String author ) {
+    	bookService.deleteBook(booktitle,author);
     	
     }
- 
-    @PutMapping("/{id}")
-    public BookDTO updateBook(@RequestBody Book book, @PathVariable Long id) {
-      return  bookService.updateBook(book,id);
-          
+    
+    @PutMapping("/inStock/{uniqueTitle}/{stock}")
+    public BookDTO updateinStock(@PathVariable String uniqueTitle , @PathVariable int stock) {
+    	return bookService.updateinStock(uniqueTitle,stock);
     }
     
-    @PutMapping("/inStock/{id}/{stock}")
-    public BookDTO updateinStock(@PathVariable Long id , @PathVariable int stock) {
-    	return bookService.updateinStock(id,stock);
-    }
-    
-    @PutMapping("/outStock/{id}")
-    public BookDTO updateoutStock(@PathVariable Long id) {
-    	return bookService.updateoutStock(id);
+    @PutMapping("/outStock/{uniqueTitle}")
+    public BookDTO updateoutStock(@PathVariable String uniqueTitle) {
+    	return bookService.updateoutStock(uniqueTitle);
     }
     
     
-    @PutMapping("/updateTagsinBook/{BookId}")
-    public BookDTO updateBookTags(@PathVariable Long BookId, @RequestBody ArrayList<String> tags) {
-      return  bookService.updateBookTags(BookId,tags);      
+    @PutMapping("/updateTagsinBook/{uniqueTitle}")
+    public BookDTO updateBookTags(@PathVariable String uniqueTitle, @RequestBody ArrayList<String> tags) {
+      return  bookService.updateBookTags(uniqueTitle,tags);      
     }	
     
-    @GetMapping("/findAllTagsinBook/{name}")
-    public ArrayList<BookTagDTO> findAllTagsinBook(@PathVariable String name) {
-        return bookService.findAllTagsinBook(name);
+    @GetMapping("/findAllTagsinBook/{uniqueTitle}")
+    public ArrayList<BookTagDTO> findAllTagsinBook(@PathVariable String uniqueTitle) {
+        return bookService.findAllTagsinBook(uniqueTitle);
     }
     
     /*
