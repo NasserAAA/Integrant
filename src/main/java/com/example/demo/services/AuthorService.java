@@ -94,7 +94,7 @@ public class AuthorService {
 	public void authorDeleteBook(String bookTitle, String authorName) {
 		String uniqueTitle = bookTitle+" Book By "+authorName;
 		Book book = bookRepository.findByUniquetitle(uniqueTitle);
-		if(book.getAuthor().getName()==authorName) {
+		if(book.getAuthor().getName().equals(authorName)) {
 			Long book_id = book.getBookId();
 			bookRepository.deleteById(book_id);
 		}
