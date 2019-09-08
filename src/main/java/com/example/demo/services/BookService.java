@@ -1,6 +1,8 @@
 package com.example.demo.services;
 
 import java.util.ArrayList;
+import java.util.Optional;
+
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -77,6 +79,12 @@ public class BookService {
         bookRepository.deleteById(id);
         
     }
+    
+    public void deleteBookById(Long id) {
+        Optional<Book> book = bookRepository.findById(id);
+        bookRepository.deleteById(id);
+        
+    }
 	
     public BookDTO updateinStock(String uniqueTitle, int stock) {
     	 Book book = bookRepository.findByUniquetitle(uniqueTitle);
@@ -102,7 +110,9 @@ public class BookService {
     
     public BookDTO updateBookTags(String uniqueTitle,ArrayList<String> tags) {
     	Book book = bookRepository.findByUniquetitle(uniqueTitle);
-    	ArrayList<BookTag> booktag =  new ArrayList<BookTag>(book.getTags());
+    	ArrayList<BookTag> booktag = new ArrayList<BookTag>();
+    	if(book.getTags()!=null)
+    	 booktag =  new ArrayList<BookTag>(book.getTags());
     	for(int i = 0;i<tags.size();i++) {
     		BookTag strTag = bookTagRepository.findByName(tags.get(i));
     		if(strTag==null) {
@@ -150,6 +160,12 @@ public class BookService {
     public void deleteTag( String name) {
         BookTag booktag = bookTagRepository.findByName(name);
         Long id = booktag.getTagId();
+        bookTagRepository.deleteById(id);
+        
+    }
+    
+    public void deleteTagById(Long id) {
+        Optional<BookTag> booktag = bookTagRepository.findById(id);
         bookTagRepository.deleteById(id);
         
     }

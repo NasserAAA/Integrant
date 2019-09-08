@@ -1,14 +1,13 @@
 package com.example.demo.services;
 
 import java.util.ArrayList;
+import java.util.Optional;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.demo.DTO.AuthorDTO;
 import com.example.demo.DTO.BookDTO;
-import com.example.demo.exceptionhandler.AuthorNotFoundException;
 import com.example.demo.exceptionhandler.BookIdMismatchException;
-import com.example.demo.exceptionhandler.BookNotFoundException;
 import com.example.demo.mapper.AuthorMapper;
 import com.example.demo.mapper.BookMapper;
 import com.example.demo.model.Author;
@@ -66,6 +65,12 @@ public class AuthorService {
          Long id = author.getAuthorId();	 
          authorRepository.deleteById(id);
          }
+        
+    }
+	
+	public void deleteAuthorById(Long id) {
+        Optional<Author> author = authorRepository.findById(id);
+        authorRepository.deleteById(id);
         
     }
 	
