@@ -53,6 +53,12 @@ public class BookController {
     	
     }
     
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id ) {
+    	bookService.deleteBookById(id);
+    	
+    }
+    
     @PutMapping("/inStock/{uniqueTitle}/{stock}")
     public BookDTO updateinStock(@PathVariable String uniqueTitle , @PathVariable int stock) {
     	return bookService.updateinStock(uniqueTitle,stock);
