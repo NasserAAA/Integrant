@@ -1,5 +1,6 @@
 spring:
-  profiles: dev  application:
+  profiles:
+    active : dev  application:
     name: Bootstrap Spring Boot
   jpa:
     hibernate:      ddl-auto: none
@@ -7,16 +8,21 @@ spring:
     properties: 
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
+        id:
+          new_generator_mappings: false
   datasource:
-    url: jdbc:mysql://localhost:3306/db-spring?createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/spring?createDatabaseIfNotExist=true
     username: root
     password: nasser
     initialization-mode: always
+    continue-on-error: true
   thymeleaf:
     cache: false
     enabled: true
     prefix: classpath:/templates/
     suffix: .html 
+    
+    
 ---
  spring:
     profiles: test

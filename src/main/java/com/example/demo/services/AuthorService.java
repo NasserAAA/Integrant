@@ -62,7 +62,7 @@ public class AuthorService {
 	public void deleteAuthor( String name) {
          Author author = authorRepository.findByName(name);
          if(!(author==null)) {
-         Long id = author.getAuthorId();	 
+         Long id = author.getUserId();	 
          authorRepository.deleteById(id);
          }
         
@@ -76,7 +76,7 @@ public class AuthorService {
 	
 	 public AuthorDTO updateAuthor( Author author, String name) {
 	        Author newAuthor = authorRepository.findByName(name);
-	        author.setAuthorId(newAuthor.getAuthorId());
+	        author.setUserId(newAuthor.getUserId());
 	        authorRepository.save(author);
 	        AuthorDTO authordto = authorMapper.AuthorToDTO(author,authorRepository);
 	        return authordto;

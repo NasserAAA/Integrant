@@ -1,6 +1,8 @@
 package com.example.demo.model;
 
 import java.util.Collection;
+
+import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,22 +16,19 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name="authors")
-public class Author {
-	
-	@Id
-	@GeneratedValue
-	@Column(name="author_id")
-	private Long authorId;
-	
-	@Column(name="name",nullable=false)
-	private String name;
-	
-	@Column(name="email",nullable=false,unique=true)
-	private String email;
+@AttributeOverride(name="user_id", column=@Column(name="author_id"))
+public class Author extends UserRecord {
+
+	@Column(name="num_books",nullable=false)
+	private int numBooks;
 	
 	@OneToMany(mappedBy = "author",fetch = FetchType.LAZY)
     private Collection<Book> books;
 
-	
-	
+	public Author() {
+		if(this.books!=null)
+			this.numBooks=this.books.size();
+		else
+			this.numBooks=0;
+	}
 }

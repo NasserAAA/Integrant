@@ -19,6 +19,7 @@ public interface AuthorMapper {
 	
 	@Mappings({
         @Mapping(source = "name", target = "name"),
+        @Mapping(source="numBooks",target = "numBooks" ),
 		@Mapping(target="books",ignore= true)
 		})
 	AuthorDTO AuthorToDTO(Author source,@Context AuthorRepository service);
@@ -33,6 +34,7 @@ public interface AuthorMapper {
 				strBooks.add(objBooks.get(i).getTitle());
 			target.setBooks(strBooks);
 			}
+			target.setNumBooks(source.getNumBooks());
 	        target.setName(source.getName());
 	   }
 	
@@ -46,6 +48,7 @@ public interface AuthorMapper {
 	
 	@Mappings({
         @Mapping(source = "name", target = "name"),
+        @Mapping(source="numBooks",target = "numBooks" ),
 		@Mapping(target="books",ignore= true)
 		})
 	Author DTOToAuthor(AuthorDTO source,@Context AuthorRepository service);
@@ -53,6 +56,7 @@ public interface AuthorMapper {
 	default void DTOToAuthor( @MappingTarget Author target, AuthorDTO source,@Context AuthorRepository service ) {
 		   Author result= service.findByName(source.getName());
 	        target.setBooks(result.getBooks());
+	        target.setNumBooks(result.getNumBooks());
 	}
 	
 	default Collection<Author> DTOsToAuthors(ArrayList<AuthorDTO> authors,@Context AuthorRepository service){

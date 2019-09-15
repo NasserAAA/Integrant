@@ -109,7 +109,7 @@ public class AuthorControllerTest {
     	Author author = new Author(); 
     	author.setName("Create Author");
     	author.setEmail("CA@gmail.com");
-    	author.setAuthorId((long)3);
+    	author.setUserId((long)3);
     	ObjectMapper objectMapper = new ObjectMapper();
         String json = objectMapper.writeValueAsString(author);
     	this.mockMvc.perform(post("/api/authors")

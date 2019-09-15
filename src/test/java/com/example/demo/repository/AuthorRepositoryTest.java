@@ -60,7 +60,7 @@ public class AuthorRepositoryTest {
 		author.setEmail("YN@gmail.com");
 		em.persist(author);
 		em.flush();
-		Optional<Author> found = authorRepository.findById(author.getAuthorId());
+		Optional<Author> found = authorRepository.findById(author.getUserId());
 		if(found.isPresent())
 	    	assertThat(found.get().getName()).isEqualTo(author.getName());
 	    else

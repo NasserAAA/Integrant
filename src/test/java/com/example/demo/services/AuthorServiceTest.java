@@ -83,8 +83,8 @@ public class AuthorServiceTest {
 	@Test
     public void whenDeleteAuthor_thenAuthorShouldBeDeleted() {
 		Author author=new Author();
-        authorService.deleteAuthorById(author.getAuthorId());;
-        verify(authorRepository, times(1)).deleteById((author.getAuthorId()));
+        authorService.deleteAuthorById(author.getUserId());;
+        verify(authorRepository, times(1)).deleteById((author.getUserId()));
      }
 	
 	@Test
