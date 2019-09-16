@@ -53,10 +53,10 @@ foreign key (`tweet_id`) references tweets(`tweet_id`) on delete cascade on upda
 foreign key (`tweet_tag_id`) references twittertags(`tweet_tag_id`) on delete cascade on update cascade
 );
 create table IF NOT EXISTS authors(
-`author_id` int NOT NULL,
+`user_id` int NOT NULL,
 `num_books` int NOT NULL,
-primary key(`author_id`),
-foreign key(`author_id`) references users(`user_id`)  on delete cascade on update cascade
+primary key(`user_id`),
+foreign key(`user_id`) references users(`user_id`)  on delete cascade on update cascade
 );
 create table IF NOT EXISTS books(
 `book_id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -65,7 +65,7 @@ create table IF NOT EXISTS books(
 `uniquetitle` varchar(60) NOT NULL UNIQUE,
 `stock` int NOT NULL default 0 ,
 `instock` boolean NOT NULL default false,
-foreign key (`author`) references authors(`author_id`) on delete cascade on update cascade
+foreign key (`author`) references authors(`user_id`) on delete cascade on update cascade
 );
 create table IF NOT EXISTS tags(
 `tag_id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,

@@ -27,10 +27,10 @@ import lombok.Data;
 @Data
 @Table(name="users")
 @Inheritance(
-	    strategy = InheritanceType.TABLE_PER_CLASS
+	    strategy = InheritanceType.JOINED
 	)
 public class UserRecord {  
-	private @Id  @GeneratedValue(strategy = GenerationType.TABLE) @Column(name="user_id") Long userId;  
+	private @Id  @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name="user_id") Long userId;  
 	private @Column(name="name") @NotBlank(message = "Name is mandatory",groups = FirstOrder.class) String name;  
     private @Column(name="email",unique=true) @NotBlank(message = "Email is mandatory",groups = FirstOrder.class) @ValidEmail(groups = SecondOrder.class) String email; 
     private @Column(name="password") @NotBlank(groups = FirstOrder.class) @ValidPassword(groups = SecondOrder.class) String password;

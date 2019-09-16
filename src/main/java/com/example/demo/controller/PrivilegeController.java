@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.dto.PrivilegeDto;
 import com.example.demo.exceptions.PrivilegeNotFoundException;
 import com.example.demo.mapper.PrivilegeMapper;
-import com.example.demo.model.Privilege;
 import com.example.demo.services.PrivilegeService;
 
 @SuppressWarnings("unused")

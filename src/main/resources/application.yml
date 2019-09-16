@@ -21,7 +21,17 @@ spring:
     enabled: true
     prefix: classpath:/templates/
     suffix: .html 
-    
+  mail:
+      host: smtp.gmail.com
+      port: 587
+      username: marwanayman1998@gmail.com
+      password:  evkqolavxbevygrx
+      properties:
+        mail:
+          smtp:
+            auth: true
+            starttls:
+              enable: true
     
 ---
  spring:

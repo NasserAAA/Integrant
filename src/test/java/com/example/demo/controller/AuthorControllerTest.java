@@ -82,7 +82,7 @@ public class AuthorControllerTest {
 	
 	@Test
 	@Order(2)
-	public void whenFindAuthorByName_thenOk() throws Exception
+	public void whenFindAuthorByEmail_thenOk() throws Exception
 	{
 		mockMvc.perform(get("/api/authors/email/{email}", "U@gmail.com")
 		          .contentType(MediaType.APPLICATION_JSON))
@@ -93,7 +93,7 @@ public class AuthorControllerTest {
 	
 	@Test
 	@Order(3)
-	public void whenFindAuthorByEmail_thenOk() throws Exception
+	public void whenFindAuthorByName_thenOk() throws Exception
 	{
 		mockMvc.perform(get("/api/authors/{name}", "Dummy Author")
 		          .contentType(MediaType.APPLICATION_JSON))

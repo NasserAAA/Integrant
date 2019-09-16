@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 public class UserFront {
-	private long user_id;
+	private long userId;
 	private String email;
 	private String name;
 	private ArrayList<String> roles;

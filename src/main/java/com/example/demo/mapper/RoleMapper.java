@@ -20,7 +20,7 @@ import com.example.demo.services.RoleService;
 public interface RoleMapper {
 	@Mappings({
         @Mapping(source = "name", target = "name"),
-        @Mapping(source = "role_id", target = "role_id"),
+        @Mapping(source = "roleId", target = "roleId"),
         @Mapping(target="privileges",ignore = true)
     })
 	RoleDto roleToDto(Role role, @Context PrivilegeService service);
@@ -30,7 +30,7 @@ public interface RoleMapper {
 	   }
 	@Mappings({
         @Mapping(source = "name", target = "name"),
-        @Mapping(source = "role_id", target = "role_id"),
+        @Mapping(source = "roleId", target = "roleId"),
         @Mapping(target="privileges",ignore = true)
     })
 	Role dtoToRole(RoleDto roleDto, @Context RoleService service);

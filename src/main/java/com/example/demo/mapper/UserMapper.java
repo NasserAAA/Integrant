@@ -14,12 +14,11 @@ import com.example.demo.dto.UserFront;
 import com.example.demo.model.UserRecord;
 import com.example.demo.services.RoleService;
 import com.example.demo.services.UserService;
-
 @Mapper(componentModel="spring")
 public interface UserMapper {
 	
 		@Mappings({
-        @Mapping(source = "user_id", target = "user_id"),
+        @Mapping(source = "userId", target = "userId"),
         @Mapping(source = "name", target = "name"),
         @Mapping(source = "email", target = "email"),
 		@Mapping(target="roles",ignore = true)
@@ -32,7 +31,7 @@ public interface UserMapper {
 	   }
 	   
 		@Mappings({
-			@Mapping(source = "user_id", target = "user_id"),
+			@Mapping(source = "userId", target = "userId"),
 	        @Mapping(source = "name", target = "name"),
 	        @Mapping(source = "email", target = "email"),
 			@Mapping(target="roles",ignore = true)
