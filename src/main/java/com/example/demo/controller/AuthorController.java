@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import com.example.demo.DTO.AuthorDTO;
-import com.example.demo.DTO.BookDTO;
+
+import com.example.demo.dto.AuthorDTO;
+import com.example.demo.dto.BookDTO;
 import com.example.demo.model.Author;
 import com.example.demo.model.Book;
 import com.example.demo.services.AuthorService;

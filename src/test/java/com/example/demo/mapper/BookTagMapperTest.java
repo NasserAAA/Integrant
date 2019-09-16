@@ -14,8 +14,8 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.example.demo.DTO.BookDTO;
-import com.example.demo.DTO.BookTagDTO;
+import com.example.demo.dto.BookDTO;
+import com.example.demo.dto.BookTagDTO;
 import com.example.demo.model.Author;
 import com.example.demo.model.Book;
 import com.example.demo.model.BookTag;

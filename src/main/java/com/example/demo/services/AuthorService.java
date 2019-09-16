@@ -5,9 +5,10 @@ import java.util.Optional;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.example.demo.DTO.AuthorDTO;
-import com.example.demo.DTO.BookDTO;
-import com.example.demo.exceptionhandler.BookIdMismatchException;
+
+import com.example.demo.dto.AuthorDTO;
+import com.example.demo.dto.BookDTO;
+import com.example.demo.exceptions.BookIdMismatchException;
 import com.example.demo.mapper.AuthorMapper;
 import com.example.demo.mapper.BookMapper;
 import com.example.demo.model.Author;

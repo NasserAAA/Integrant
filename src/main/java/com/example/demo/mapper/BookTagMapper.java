@@ -8,7 +8,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.Mappings;
-import com.example.demo.DTO.BookTagDTO;
+
+import com.example.demo.dto.BookTagDTO;
 import com.example.demo.model.Book;
 import com.example.demo.model.BookTag;
 import com.example.demo.repository.BookTagRepository;

@@ -6,9 +6,10 @@ import java.util.Optional;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.example.demo.DTO.BookDTO;
-import com.example.demo.DTO.BookTagDTO;
-import com.example.demo.exceptionhandler.BookNotFoundException;
+
+import com.example.demo.dto.BookDTO;
+import com.example.demo.dto.BookTagDTO;
+import com.example.demo.exceptions.BookNotFoundException;
 import com.example.demo.mapper.BookMapper;
 import com.example.demo.mapper.BookTagMapper;
 import com.example.demo.model.Author;

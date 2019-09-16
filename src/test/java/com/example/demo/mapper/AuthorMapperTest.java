@@ -13,7 +13,8 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import com.example.demo.DTO.AuthorDTO;
+
+import com.example.demo.dto.AuthorDTO;
 import com.example.demo.model.Author;
 import com.example.demo.model.Book;
 import com.example.demo.model.BookTag;
